@@ -56,14 +56,14 @@ public class Person {
                 System.out.println(this.spouse.getName() + " разводится с " + this.getName());
                 this.spouse.divorce();
                 this.divorce();
-                System.out.println(person.getSpouse().getName() + " развелся с " + person.getName());
+                System.out.println(person.getSpouse().getName() + " разводится с " + person.getName());
                 person.getSpouse().divorce();
                 person.divorce();
                 return true;
             } else if (this.spouse == null && person.getSpouse() != null) { //один разводится
+                System.out.println(person.getSpouse().getName() + " разводится с " + person.getName());
                 person.getSpouse().divorce();
                 person.divorce();
-                System.out.println(person.getSpouse().getName() + " развелся с " + person.getName());
                 getMarried = true;
             } else if (this.spouse != null && person.getSpouse() == null) { //другой разводится
                 System.out.println(this.spouse.getName() + " разводится с " + this.getName());
