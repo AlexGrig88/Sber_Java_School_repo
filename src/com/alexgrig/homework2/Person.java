@@ -17,12 +17,22 @@ public class Person {
         this.spouse = spouse;
     }
 
+    public String getName() {
+        return name;
+    }
+
+
     public Person getSpouse() {
         return spouse;
     }
 
     public void setSpouse(Person spouse) {
+        if (this.man == spouse.man) {
+            System.out.println("Error! Нельзя установить супруга того же пола");
+            return;
+        }
         this.spouse = spouse;
+        System.out.println(spouse.getName() + " и " + this.getName() + " стали супругами!\n");
     }
 
 
@@ -30,6 +40,8 @@ public class Person {
 
         boolean getMarried = true;
 
+        //если это один и тот же человек, то нельзя никак
+        if (this == person)  return false;
         // если они уже состоят в браке между собой, то нет смысла жениться
         if (this.spouse == person || person.getSpouse() == this) {
             return false;
@@ -39,15 +51,23 @@ public class Person {
         // которые необходимо выполнить
         if (this.man != person.man) {
             if (this.spouse == null && person.getSpouse() == null) { //оба свободны - могут жениться
-                getMarried = true;
+                return true;
             } else if (this.spouse != null && person.getSpouse() != null) { //оба в браке - оба разводятся
+                System.out.println(this.spouse.getName() + " разводится с " + this.getName());
+                this.spouse.divorce();
                 this.divorce();
+                System.out.println(person.getSpouse().getName() + " развелся с " + person.getName());
+                person.getSpouse().divorce();
                 person.divorce();
-                getMarried = true;
+                return true;
             } else if (this.spouse == null && person.getSpouse() != null) { //один разводится
+                person.getSpouse().divorce();
                 person.divorce();
+                System.out.println(person.getSpouse().getName() + " развелся с " + person.getName());
                 getMarried = true;
             } else if (this.spouse != null && person.getSpouse() == null) { //другой разводится
+                System.out.println(this.spouse.getName() + " разводится с " + this.getName());
+                this.spouse.divorce();
                 this.divorce();
                 getMarried = true;
             }
