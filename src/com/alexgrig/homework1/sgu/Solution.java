@@ -15,10 +15,17 @@ public class Solution {
     public static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-
+        //task2001();
+        //task2002();
         //task2003();
         //task2004();
         //task2005();
+        //task2006();
+        //task2007();
+        //task2008();
+        //task2009();
+        //task2012();
+        //task2015();
         //task2014_AlgorithmEvklida();
         //analysisOfAge();
         //createPolindrom();
@@ -28,6 +35,24 @@ public class Solution {
 
     }
     //номер таски соответствует ID задачи с сайта http://acm.sgu.ru/lang/register2.php.
+
+    public static void task2001() {
+        int a = scanner.nextInt();
+        int b = scanner.nextInt();
+
+        System.out.println(a + b);
+    }
+
+    public static void task2002() {
+        int n = scanner.nextInt();
+        int sum = 0;
+        for (int i = 0; i < n; i++) {
+            sum += scanner.nextInt();
+        }
+
+        System.out.println(sum);
+    }
+
 
     //2003. Альтернированная сумма чисел
     public static void task2003() {
@@ -68,6 +93,109 @@ public class Solution {
         }
         System.out.println(indexOfMinNumber);
 
+    }
+
+    private static void task2015() {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int x = 2;
+        System.out.println(x++);
+        boolean flag = false;
+        while (x <= n) {
+            flag = false;
+            for (int i = 2; i < x; i++) {
+                if (x % i == 0) {
+                    flag = true;
+                    break;
+                }
+            }
+            if (!flag) {
+                System.out.println(x);
+            }
+            x++;
+        }
+    }
+
+    private static void task2012() {
+        Scanner scanner = new Scanner(System.in);
+        int a1 = scanner.nextInt();
+        int b1 = scanner.nextInt();
+        int a2 = scanner.nextInt();
+        int b2 = scanner.nextInt();
+        if (a1 == a2 && b1 + b2 == a1) {
+            System.out.println("YES");
+        } else if (b1 == b2 && a1 + a2 == b1) {
+            System.out.println("YES");
+        } else if (a1 == b2 && a2 + b1 == a1) {
+            System.out.println("YES");
+        } else if (a2 == b1 && a1 + b2 == a2) {
+            System.out.println("YES");
+        } else {
+            System.out.println("NO");
+        }
+    }
+
+    private static void task2009() {
+        Scanner scanner = new Scanner(System.in);
+        int quantity = scanner.nextInt();
+        int sum = scanner.nextInt();
+        int k = 2;
+        for (int i = 2; i < quantity + 1; i++) {
+            if (i == k) {
+                sum += scanner.nextInt();
+                k *= 2;
+                continue;
+            }
+            scanner.next();
+        }
+        System.out.println(sum);
+    }
+
+    private static void task2008() {
+        Scanner scanner = new Scanner(System.in);
+        int quantity = scanner.nextInt();
+        int capacity = scanner.nextInt();
+
+        int counter = 0;
+        int currentCapacity = 0;
+        for (int i = 0; i < quantity; i++) {
+            int weight = scanner.nextInt();
+            if (currentCapacity + weight < capacity) {
+                currentCapacity += weight;
+                counter++;
+            } else if(currentCapacity + weight == capacity) {
+                currentCapacity += weight;
+                counter++;
+                break;
+            } else {
+
+            }
+        }
+        System.out.println(counter + " " + currentCapacity);
+    }
+
+    private static void task2007() {
+        Scanner scanner = new Scanner(System.in);
+        int num = scanner.nextInt();
+        int divider = 2;
+        int counter = 0;
+        while (num % divider == 0) {
+            counter++;
+            divider *= 2;
+        }
+        System.out.println(counter);
+    }
+
+    private static void task2006() {
+        Scanner scanner = new Scanner(System.in);
+        int cm = scanner.nextInt();
+        int inch = cm / 3;
+        if (cm % 3 == 2) {
+            inch += 1;
+        }
+        int fount = inch / 12;
+        inch = inch % 12;
+        System.out.print(fount + " " + inch);
     }
 
     //2014. Алгоритм Евклида
