@@ -26,18 +26,8 @@ public class Person {
         return spouse;
     }
 
-    public void setSpouse(Person spouse) {
-        if (this == spouse) {
-            System.out.println("Error! Нельзя установить супругом самого себя");
-            return;
-        }
-        if (this.man == spouse.man) {
-            System.out.println("Error! Нельзя установить супруга того же пола");
-            return;
-        }
-
+    private void setSpouse(Person spouse) {
         this.spouse = spouse;
-        System.out.println(spouse.getName() + " и " + this.getName() + " стали супругами!\n");
     }
 
 
@@ -55,20 +45,28 @@ public class Person {
         // которые необходимо выполнить
         if (this.man != person.man) {
             if (this.spouse == null && person.getSpouse() == null) { //оба свободны - могут жениться
+                this.setSpouse(person);
+                person.setSpouse(this);
                 getMarried = true;
             } else if (this.spouse != null && person.getSpouse() != null) { //оба в браке - оба разводятся
                 this.spouse.divorce();
                 this.divorce();
                 person.getSpouse().divorce();
                 person.divorce();
+                this.setSpouse(person);
+                person.setSpouse(this);
                 getMarried = true;
             } else if (this.spouse == null && person.getSpouse() != null) { //один разводится
                 person.getSpouse().divorce();
                 person.divorce();
+                this.setSpouse(person);
+                person.setSpouse(this);
                 getMarried = true;
             } else if (this.spouse != null && person.getSpouse() == null) { //другой разводится
                 this.spouse.divorce();
                 this.divorce();
+                this.setSpouse(person);
+                person.setSpouse(this);
                 getMarried = true;
             }
         } else {
