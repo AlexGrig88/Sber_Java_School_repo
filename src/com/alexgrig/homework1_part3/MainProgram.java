@@ -1,4 +1,4 @@
-package com.alexgrig.homework2;
+package com.alexgrig.homework1_part3;
 
 public class MainProgram {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package com.alexgrig.homework2;
+package com.alexgrig.homework1_part3;
 
 // 2)Реализовать класс  Person и методы marry, divorce , запушить в github
 public class Person {
@@ -26,7 +26,7 @@ public class Person {
         return spouse;
     }
 
-    private void setSpouse(Person spouse) {
+    public void setSpouse(Person spouse) {
         this.spouse = spouse;
     }
 
