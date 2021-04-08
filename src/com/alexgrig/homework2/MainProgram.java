@@ -27,25 +27,14 @@ public class MainProgram {
 
         person2.setSpouse(person3);
         person1.setSpouse(person4);
-//        person3.setSpouse(person2);
-//        person4.setSpouse(person1);
 
         System.out.println(person2.getName() + " и " + person1.getName() +
                 " могут вступить в брак? - " + person1.marry(person2));
         System.out.println(person3.getName() + " и " + person4.getName() +
                 " могут вступить в брак? - " + person4.marry(person3));
 
-
-
-//        person1.setSpouse(person2);
-//        System.out.println("Они могут вступить в брак? - " + person1.marry(person2));
-//        person3.setSpouse(person4);
-//        System.out.println("Они могут вступить в брак? - " + person4.marry(person4));
-
-
-//        person2.setSpouse(person1);
-//        person1.setSpouse(person2);
-//        System.out.println("Они могут вступить в брак? - " + person1.marry(person4));
+        person1.setSpouse(person1);
+        person1.setSpouse(person3);
 
     }
 }
