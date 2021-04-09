@@ -45,28 +45,16 @@ public class Person {
         // которые необходимо выполнить
         if (this.man != person.man) {
             if (this.spouse == null && person.getSpouse() == null) { //оба свободны - могут жениться
-                this.setSpouse(person);
-                person.setSpouse(this);
                 getMarried = true;
             } else if (this.spouse != null && person.getSpouse() != null) { //оба в браке - оба разводятся
-                this.spouse.divorce();
                 this.divorce();
-                person.getSpouse().divorce();
                 person.divorce();
-                this.setSpouse(person);
-                person.setSpouse(this);
                 getMarried = true;
             } else if (this.spouse == null && person.getSpouse() != null) { //один разводится
-                person.getSpouse().divorce();
                 person.divorce();
-                this.setSpouse(person);
-                person.setSpouse(this);
                 getMarried = true;
             } else if (this.spouse != null && person.getSpouse() == null) { //другой разводится
-                this.spouse.divorce();
                 this.divorce();
-                this.setSpouse(person);
-                person.setSpouse(this);
                 getMarried = true;
             }
         } else {
@@ -79,6 +67,7 @@ public class Person {
 
     public boolean divorce() {
         if (this.spouse != null) {
+            this.spouse.spouse = null;
             this.spouse = null;
             return true;
         }
