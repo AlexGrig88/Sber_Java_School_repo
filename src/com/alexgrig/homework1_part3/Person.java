@@ -33,35 +33,26 @@ public class Person {
 
     public boolean marry(Person person) {
 
-        //если это один и тот же человек, то нельзя никак
-        if (this == person)  return false;
         // если они уже состоят в браке между собой, то нет смысла жениться
         if (this.spouse == person || person.getSpouse() == this) {
             return false;
         }
+        //если они одного пола, то нельзя вступить в традиционный брак
+        if (this.man == person.man) return false;
 
-        boolean getMarried = false;
         // если они разного пола, то можно вступать в брак при определённых действиях,
         // которые необходимо выполнить
-        if (this.man != person.man) {
-            if (this.spouse == null && person.getSpouse() == null) { //оба свободны - могут жениться
-                getMarried = true;
-            } else if (this.spouse != null && person.getSpouse() != null) { //оба в браке - оба разводятся
-                this.divorce();
-                person.divorce();
-                getMarried = true;
-            } else if (this.spouse == null && person.getSpouse() != null) { //один разводится
-                person.divorce();
-                getMarried = true;
-            } else if (this.spouse != null && person.getSpouse() == null) { //другой разводится
-                this.divorce();
-                getMarried = true;
-            }
-        } else {
-            getMarried = false;
+
+        if (this.spouse != null && person.getSpouse() != null) { //оба в браке - оба разводятся
+            this.divorce();
+            person.divorce();
+        } else if (this.spouse == null && person.getSpouse() != null) { //один разводится
+            person.divorce();
+        } else if (this.spouse != null && person.getSpouse() == null) { //другой разводится
+            this.divorce();
         }
 
-        return getMarried;
+        return true;
     }
 
 
