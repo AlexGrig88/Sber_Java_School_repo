@@ -120,13 +120,13 @@ public class MainProgram {
 
     public static String getUserInput() {
         scanner = new Scanner(System.in);
-        int pin1 = 0, pin2 = 0, pin3 = 0, pin4 = 0;
+        int pin1 = 22, pin2 = 22, pin3 = 22, pin4 = 22;
         while (true) {
             try {
-                pin1 = pin1 == 0 ? scanner.nextInt() : pin1;
-                pin2 = pin2 == 0 ? scanner.nextInt() : pin2;
-                pin3 = pin3 == 0 ? scanner.nextInt() : pin3;
-                pin4 = pin4 == 0 ? scanner.nextInt() : pin4;
+                pin1 = pin1 == 22 ? scanner.nextInt() : pin1;
+                pin2 = pin2 == 22 ? scanner.nextInt() : pin2;
+                pin3 = pin3 == 22 ? scanner.nextInt() : pin3;
+                pin4 = pin4 == 22 ? scanner.nextInt() : pin4;
                 break;
             } catch (InputMismatchException e) {
                 System.out.println("Пин код должен содержать только цифры. Повторите попытку!");
