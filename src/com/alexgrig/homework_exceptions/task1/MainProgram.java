@@ -33,12 +33,9 @@ public class MainProgram {
         while (true) {
             try {
                 if (terminal.isValidPin(pinCode)) break;
-            } catch (AccountIsLockedException e) { // сообщаем сколько времени до снятия блокировки, внутри терминала
-                System.out.println(e.getMessage()); // запускается таймер
-                pinCode = getUserInput();  //не блокируем пользовательский ввод
-                continue;
-            } catch (TerminalException ex) {  //при потпытки снова отправить пин, получаем сообщение об оставшемся времени
-                System.out.println(ex.getMessage());
+            } catch (AccountIsLockedException e) {
+                System.out.println(e.getMessage());  //общее сообщение, переданное от сервера
+                System.out.println(e.getAdditionalMessage()); // сообщаем сколько времени до снятия блокировки
                 pinCode = getUserInput();  //не блокируем пользовательский ввод
                 continue;
             }

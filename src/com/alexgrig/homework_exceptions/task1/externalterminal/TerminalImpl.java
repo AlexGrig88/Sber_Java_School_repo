@@ -21,74 +21,48 @@ public class TerminalImpl implements Terminal {
     private String cardNumber;
     private String messageForClient;
     private TerminalServer server;
-
-    private MyTimerTask timerTask;
-    private int timeRemaining = 0;
-    private int attempt = 3;
-
-
-    public long getTimeRemaining() {
-        return timeRemaining;
-    }
-
-    public void decAttempt() {
-        attempt--;
-    }
+    private int attempt;
 
     public int getAttempt() {
         return attempt;
     }
 
+    public void decAttempt() {
+        --attempt;
+    }
+
     //создаётся общедоступный терминал, который работает с предоставленным сервером
-    //и использует предоставленную реализацию алгоритма проверки пина
     public TerminalImpl(String cardNumber) throws TerminalException {
         try {
             this.cardNumber = cardNumber;
             this.server = getBankServer(cardNumber);
             //this.messageForClient = "Введите пожалуйста pin код:";
+            attempt = server.getAttempts();
         } catch (TerminalException e) {
             throw new TerminalException(e.getMessage());
         }
 
     }
 
-    public boolean isValidPin(String pin) throws AccountIsLockedException, TerminalException {
+    public boolean isValidPin(String pin) throws AccountIsLockedException {
         String ownerPin = null;
-        //проверяем запустился ли таймер обратного отсчёта
-        if (timerTask != null)  timeRemaining = timerTask.getCounter();
+        if (attempt == 0) resetAttempts();
         try {
-            if (timeRemaining == 0) {
-                ownerPin = server.getPin(attempt);
-                return pin.equals(ownerPin);
-            } else {
-                //сюда мы попадаем, когда уже возник AccountIsLockedException, но клиент продолжает набирать
-                //пин код. Тогда мы ему кидаем ислючение TerminalException с оставшимся временем до конца снятия блока
-                throw new TerminalException("До снятия блокировки осталось " + timeRemaining + " сек.");
-            }
+            ownerPin = server.getPin();
+            return pin.equals(ownerPin);
+
         } catch (AccountIsLockedException e) {
-            //из исключения извлекаем время, но которое заблокирован аккаунт
-            //и запускаем таймер, по истечении которого восстановятся попытки
-            handleAccountIsLockedException(e.getBlockingTime());
-            timeRemaining = e.getBlockingTime();
-            attempt = 3;
-            throw e;
+            if (server.getTimeRemaining() != 0) { //если таймер уже запущен добавляем информацию об оставшемся периоде
+                e.setAdditionalMessage("До снятия блокировки осталось " + server.getTimeRemaining() + " сек.");
+            }
+            throw e;  //пробрасывем этот же объект исключения дальше
         }
     }
-    //метод обратный отсчет таймера для разблокировки аккаунта
-    private void handleAccountIsLockedException(int blockingTime) {
-        new Thread(() -> {
-            Timer timer = new Timer("Timer",true);
-            timerTask = new MyTimerTask(blockingTime);
-            timer.schedule(timerTask, 1000L, 1000L);
-            try {
-                Thread.sleep(1000 * blockingTime + 1000);
-                timer.cancel();
-                System.out.println("Блокировка снята!\nВведите пожалуйста pin код:");
-            } catch (InterruptedException interruptedException) {
-                interruptedException.printStackTrace();
-            }
-        }).start();
+
+    private void resetAttempts() {
+        attempt = server.getAttempts();
     }
+
 
     //по номеру BIN карты определяем сервер банка с которым
     //устанавливаем соединение
