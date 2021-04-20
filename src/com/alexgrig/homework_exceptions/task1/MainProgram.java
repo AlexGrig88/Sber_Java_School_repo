@@ -28,23 +28,18 @@ public class MainProgram {
             e.returnCardToTheOwner();
             return;
         }
-        System.out.println(terminal.getMessageForClient());
+        System.out.println("Введите пожалуйста pin код: ");
         String pinCode = getUserInput();
         while (true) {
             try {
                 if (terminal.isValidPin(pinCode)) break;
-            } catch (AccountIsLockedException e) {
-                System.out.println(e.getMessage());
-                try {
-                    Thread.sleep(terminal.getBlockingTime());
-                } catch (InterruptedException interruptedException) {
-                    interruptedException.printStackTrace();
-                }
-                while (scanner.hasNext()) { //если пользователь продолжает вводить
-                    scanner.next();        // после выхода из блокировки-сна
-                    break;                  //считываем и отбрасываем то, что было в потоке
-                }
-                pinCode = getUserInput();
+            } catch (AccountIsLockedException e) { // сообщаем сколько времени до снятия блокировки, внутри терминала
+                System.out.println(e.getMessage()); // запускается таймер
+                pinCode = getUserInput();  //не блокируем пользовательский ввод
+                continue;
+            } catch (TerminalException ex) {  //при потпытки снова отправить пин, получаем сообщение об оставшемся времени
+                System.out.println(ex.getMessage());
+                pinCode = getUserInput();  //не блокируем пользовательский ввод
                 continue;
             }
             terminal.decAttempt();
@@ -108,7 +103,7 @@ public class MainProgram {
                     }
                     break;
                 case "0":
-                    System.out.println("До свидания!");
+                    System.out.println("\nДо свидания!");
                     isExit = true;
                     break;
                 default:

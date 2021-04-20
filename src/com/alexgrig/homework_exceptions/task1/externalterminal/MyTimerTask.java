@@ -5,6 +5,10 @@ import java.util.TimerTask;
 public class MyTimerTask extends TimerTask {
     private int counter = 10;
 
+    public MyTimerTask(int counter) {
+        this.counter = counter;
+    }
+
     public MyTimerTask() {
     }
 
@@ -15,8 +19,6 @@ public class MyTimerTask extends TimerTask {
     @Override
     public void run() {
         counter--;
-        System.out.println("До снятия блокировки осталось " + counter);
-
-
+        //System.out.println("До снятия блокировки осталось " + counter);
     }
 }

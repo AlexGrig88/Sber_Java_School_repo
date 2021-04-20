@@ -10,6 +10,7 @@ import java.util.List;
 
 public class TerminalServer implements Terminal {
 
+    private final int blockingTime = 10;
     private Account userAccount;
 
     private final List<Account> accountsList = new ArrayList<>();
@@ -28,9 +29,11 @@ public class TerminalServer implements Terminal {
         if (attempt > 0) {
             return userAccount.getPinCode();
         } else {
-            throw new AccountIsLockedException("Аккаунт заблокирован на 10 секунд.");
+            String message = "Аккаунт заблокирован на " + blockingTime + " секунд.";
+            throw new AccountIsLockedException(message, blockingTime);
         }
-    }
+
+}
 
     @Override
     public double getBalance() {
