@@ -26,6 +26,12 @@ import java.util.List;
 public class BeanUtils {
 
     public static void assign(Object to, Object from) {
+        //Можно не проверять, что это экземпляры одного и того же класса
+        //т.к. метод ищет полную совместимость между геттером и сеттером
+        //но по смыслу это скорее всего предполагается
+        if (to.getClass() != from.getClass()) {
+            throw new IllegalArgumentException("Объекты разых типов");
+        }
         Class<?> fromClazz = from.getClass();
         Class<?> toClazz = to.getClass();
         List<Method> getMethodsOfFrom = new ArrayList<>();
@@ -67,7 +73,7 @@ public class BeanUtils {
     //проверяем является ли тип геттера таким же, как у сеттера, или же тип геттера
     //входит в иерархию типа сеттера
     private static boolean isTypeCompatible(Method mGet, Method mSet) {
-        if (mGet.getReturnType().getName().equals(mSet.getParameterTypes()[0].getName())) {
+        if (mGet.getReturnType() == mSet.getParameterTypes()[0]) {
             return true;
         } else {
             Class<?> clazzSuper = mSet.getParameterTypes()[0];
