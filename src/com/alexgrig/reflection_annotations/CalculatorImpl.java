@@ -1,6 +1,14 @@
-package com.alexgrig.reflection_annotations.task1_2_3_4;
+package com.alexgrig.reflection_annotations;
 
+import com.alexgrig.reflection_annotations.Calculator;
+
+/*
+* Тестовый класс.
+* Методы и поля созданы исключительно для выполнения задач,
+* и никакой полезной смысловой нагрузки не несут
+* */
 public class CalculatorImpl implements Calculator {
+
     private String name;
     private double precision;
     public static final String MONDAY = "MONDAY";
@@ -11,6 +19,19 @@ public class CalculatorImpl implements Calculator {
     public static final String SATURDAY = "SATURDAY";
     public static final String SUNDAY = "SUNDAY";
 
+
+    public CalculatorImpl() {
+    }
+
+    @Override
+    public int calc(int number) {
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return number * 5;
+    }
 
     public CalculatorImpl(String name, double precision) {
         this.name = name;
@@ -31,11 +52,6 @@ public class CalculatorImpl implements Calculator {
 
     public void setPrecision(double precision) {
         this.precision = precision;
-    }
-
-    @Override
-    public int calc(int number) {
-        return square(number) - 2 * number;
     }
 
     private int square(int number) {

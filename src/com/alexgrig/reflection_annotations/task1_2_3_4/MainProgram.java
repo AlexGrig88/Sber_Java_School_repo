@@ -1,5 +1,7 @@
 package com.alexgrig.reflection_annotations.task1_2_3_4;
 
+import com.alexgrig.reflection_annotations.CalculatorImpl;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -33,7 +35,7 @@ public class MainProgram {
 
             Class<?> clazz = CalculatorImpl.class;
             CalculatorImpl calculator = (CalculatorImpl) clazz.getConstructor(String.class, double.class)
-                    .newInstance("Calculator Luda", 0.003);
+                    .newInstance("AwesomeCalculator", 0.003);
 
             System.out.println("Задача 2");
             Method[] methods = clazz.getMethods();
