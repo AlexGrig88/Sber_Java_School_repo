@@ -1,7 +1,7 @@
-package com.alexgrig.reflection_annotations.task6_logger;
+package com.alexgrig.homework_reflection_annotations.task6_logger;
 
-import com.alexgrig.reflection_annotations.Calculator;
-import com.alexgrig.reflection_annotations.CalculatorImpl;
+import com.alexgrig.homework_reflection_annotations.Calculator;
+import com.alexgrig.homework_reflection_annotations.CalculatorImpl;
 
 import java.lang.reflect.Proxy;
 

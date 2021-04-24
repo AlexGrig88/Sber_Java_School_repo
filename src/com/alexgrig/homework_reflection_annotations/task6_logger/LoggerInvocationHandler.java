@@ -1,4 +1,4 @@
-package com.alexgrig.reflection_annotations.task6_logger;
+package com.alexgrig.homework_reflection_annotations.task6_logger;
 
 
 import java.lang.reflect.InvocationHandler;

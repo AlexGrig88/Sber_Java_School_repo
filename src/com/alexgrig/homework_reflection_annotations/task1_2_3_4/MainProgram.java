@@ -1,6 +1,6 @@
-package com.alexgrig.reflection_annotations.task1_2_3_4;
+package com.alexgrig.homework_reflection_annotations.task1_2_3_4;
 
-import com.alexgrig.reflection_annotations.CalculatorImpl;
+import com.alexgrig.homework_reflection_annotations.CalculatorImpl;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;

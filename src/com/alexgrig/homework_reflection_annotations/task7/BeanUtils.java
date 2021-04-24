@@ -1,4 +1,4 @@
-package com.alexgrig.reflection_annotations.task7;
+package com.alexgrig.homework_reflection_annotations.task7;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

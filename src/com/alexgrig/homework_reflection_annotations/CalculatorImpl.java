@@ -1,6 +1,4 @@
-package com.alexgrig.reflection_annotations;
-
-import com.alexgrig.reflection_annotations.Calculator;
+package com.alexgrig.homework_reflection_annotations;
 
 /*
 * Тестовый класс.

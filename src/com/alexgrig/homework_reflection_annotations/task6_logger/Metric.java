@@ -1,4 +1,4 @@
-package com.alexgrig.reflection_annotations.task5_cache;
+package com.alexgrig.homework_reflection_annotations.task6_logger;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -7,5 +7,5 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Cache {
+public @interface Metric {
 }

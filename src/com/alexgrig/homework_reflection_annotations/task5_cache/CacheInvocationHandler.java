@@ -1,8 +1,7 @@
-package com.alexgrig.reflection_annotations.task5_cache;
+package com.alexgrig.homework_reflection_annotations.task5_cache;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
