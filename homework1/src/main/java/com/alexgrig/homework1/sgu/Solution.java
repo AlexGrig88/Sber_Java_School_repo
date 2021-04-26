@@ -15,7 +15,7 @@ public class Solution {
     public static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        task2001();
+        //task2001();
         //task2002();
         //task2003();
         //task2004();
@@ -31,7 +31,7 @@ public class Solution {
         //createPolindrom();
         //getQuantityMinimums();
         //queryMinInSubArray();
-        //getNotStrangeWords();
+        getNotStrangeWords();
 
     }
     //номер таски соответствует ID задачи с сайта http://acm.sgu.ru/lang/register2.php.
