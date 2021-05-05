@@ -14,6 +14,7 @@
         <module>homework_exceptions</module>
         <module>homework_generics</module>
         <module>homework_reflection_annotation</module>
+        <module>homework_classloaders</module>
     </modules>
 
     <properties>
