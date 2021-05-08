@@ -1,5 +1,6 @@
-package com.alexgrig;
+package com.alexgrig.task1;
 
+import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -14,10 +15,13 @@ public class PluginManager {
     }
 
     public Plugin load(String pluginName, String pluginClassName) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+
+        URLClassLoader pluginClassLoader = null;
         try {
-            URLClassLoader pluginClassLoader = new URLClassLoader(new URL[]{new URL(pluginRootDirectory)});
+            File dir = new File(pluginRootDirectory + "\\" + pluginName);
+            pluginClassLoader = new URLClassLoader(new URL[]{dir.toURI().toURL()});
             Class clazz = pluginClassLoader.loadClass(pluginClassName);
-            Object obj = clazz.getConstructor(String.class).newInstance(pluginName);
+            Object obj = clazz.getConstructor().newInstance();
             if (obj instanceof Plugin) {
                 return (Plugin) obj;
             } else {
