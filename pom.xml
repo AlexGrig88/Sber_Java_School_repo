@@ -15,6 +15,7 @@
         <module>homework_generics</module>
         <module>homework_reflection_annotation</module>
         <module>homework_classloaders</module>
+        <module>homework_serialization_proxy</module>
     </modules>
 
     <properties>
