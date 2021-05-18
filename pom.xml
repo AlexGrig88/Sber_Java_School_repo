@@ -17,6 +17,7 @@
         <module>homework_classloaders</module>
         <module>homework_serialization_proxy</module>
         <module>homework_lambda_stream</module>
+        <module>homework_multithreading_1</module>
     </modules>
 
     <properties>
