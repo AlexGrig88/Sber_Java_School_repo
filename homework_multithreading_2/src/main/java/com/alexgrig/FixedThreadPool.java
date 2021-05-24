@@ -12,23 +12,22 @@ public class FixedThreadPool implements ThreadPool {
     private List<PoolThreadRunnable> runnables = new ArrayList<>();
     private boolean isStopped = false;
 
-    public FixedThreadPool(int noOfThreads, int maxNoOfTasks){
-        taskQueue = new ArrayBlockingQueue(maxNoOfTasks);
+    public FixedThreadPool(int numberOfThreads){
+        taskQueue = new ArrayBlockingQueue(10);
 
-        for(int i=0; i<noOfThreads; i++){
+        for(int i=0; i<numberOfThreads; i++){
             PoolThreadRunnable poolThreadRunnable =
                     new PoolThreadRunnable(taskQueue);
 
             runnables.add(new PoolThreadRunnable(taskQueue));
         }
-        for(PoolThreadRunnable runnable : runnables){
-            new Thread(runnable).start();
-        }
     }
 
     @Override
     public void start() {
-
+        for(PoolThreadRunnable runnable : runnables){
+            new Thread(runnable).start();
+        }
     }
 
     @Override

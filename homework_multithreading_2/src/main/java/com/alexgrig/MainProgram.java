@@ -7,7 +7,19 @@ import java.util.concurrent.Executors;
 public class MainProgram {
     public static void main(String[] args) throws Exception {
 
-        FixedThreadPool threadPool = new FixedThreadPool(3, 10);
+        FixedThreadPool threadPool = new FixedThreadPool(3);
+
+        threadPool.start();
+
+//        threadPool.execute(() -> {
+//            try {
+//                System.out.println("start");
+//                Thread.sleep(3000L);
+//                System.out.println("end");
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        });
 
         for(int i=0; i<10; i++) {
 
