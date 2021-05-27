@@ -33,6 +33,7 @@ public class MainProgram {
         }
 
         System.out.println("Выполнены или отменены все таски?: " + context.isFinished());
+        System.out.println("Main program end!");
     }
 }
 

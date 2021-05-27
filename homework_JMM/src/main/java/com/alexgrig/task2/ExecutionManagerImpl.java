@@ -14,8 +14,8 @@ import java.util.concurrent.Future;
 public class ExecutionManagerImpl implements ExecutionManager {
 
     private final ExecutorService service;
+    private List<Runnable> skippedTasks = new ArrayList<>();
     private volatile Context context;
-    private List<Runnable> skippedTasks;
 
     public ExecutionManagerImpl() {
         this.service = Executors.newFixedThreadPool(3);
