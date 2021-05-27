@@ -4,9 +4,11 @@ public class MainProgram {
     public static void main(String[] args) {
         ExecutionManager manager = new ExecutionManagerImpl();
         MyTask[] tasks = {
-                new MyTask(1L),
+                new MyTask(100L),
                 new MyTask(1800L),
-                new MyTask(5000L)
+                new MyTask(5000L),
+                new MyTask(300L),
+                new MyTask(500L)
         };
 
         Context context = manager.execute(() -> {
@@ -14,7 +16,8 @@ public class MainProgram {
         }, tasks);
 
         System.out.println("Выполнено задач: " + context.getCompletedTaskCount());
-
+        context.interrupt();
+        System.out.println("Не выполненных задач: " + context.getInterruptedTaskCount());
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {

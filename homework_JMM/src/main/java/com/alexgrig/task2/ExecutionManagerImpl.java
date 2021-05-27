@@ -1,5 +1,7 @@
 package com.alexgrig.task2;
 
+import com.alexgrig.task1.Task;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -13,9 +15,10 @@ public class ExecutionManagerImpl implements ExecutionManager {
 
     private final ExecutorService service;
     private volatile Context context;
+    private List<Runnable> skippedTasks;
 
     public ExecutionManagerImpl() {
-        this.service = Executors.newFixedThreadPool(4);
+        this.service = Executors.newFixedThreadPool(3);
     }
 
     @Override
@@ -27,20 +30,21 @@ public class ExecutionManagerImpl implements ExecutionManager {
             futureList.add(service.submit(task));
         }
 
-        new Thread(() -> {
+        Thread threadCallback = new Thread(() -> {
             for (Future future : futureList) {  //вызывая метод get засталяем поток подождать пока
-                // все таски завершатся
                 try {
                     future.get();
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    break;
+                    //callback.run();
                 } catch (ExecutionException e) {
                     e.printStackTrace();
                 }
             }
             callback.run();
             service.shutdown();
-        }).start();
+        });
+        threadCallback.start();
 
 
         System.out.println("Execute return");
@@ -62,13 +66,13 @@ public class ExecutionManagerImpl implements ExecutionManager {
 
             @Override
             public int getInterruptedTaskCount() {
-                return 0;
+                return skippedTasks.size();
             }
 
             @Override
             public void interrupt() {
-                for (Runnable task : tasks) {
-                }
+                skippedTasks = service.shutdownNow();
+                threadCallback.interrupt();
             }
 
             @Override
