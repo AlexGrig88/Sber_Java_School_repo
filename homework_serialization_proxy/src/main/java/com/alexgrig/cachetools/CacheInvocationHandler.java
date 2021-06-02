@@ -4,14 +4,16 @@ import java.io.*;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class CacheInvocationHandler implements InvocationHandler {
 
     private final Object delegate;
-    private Map<String, Object> cacheMap = new HashMap<>();
-    private String rootDirectory;
+    private final SyncMap<String, Object> cacheMap = new SyncMap<>(new HashMap<>());
+    //private final ConcurrentHashMap<String, Object> cacheMap = new ConcurrentHashMap<>();
+    private final String rootDirectory;
     private final int cacheSize;
-    ObjectOutputStream streamIfFileNotExists = null;
+    private ObjectOutputStream streamIfFileNotExists = null;
     boolean isInitialized = false;
 
 

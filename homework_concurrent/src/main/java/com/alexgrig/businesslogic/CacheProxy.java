@@ -6,18 +6,17 @@ import java.lang.reflect.Proxy;
 
 public class CacheProxy {
 
-    private final String rootDirectory;
-    private final int cacheSize;
+    private String rootDirectory;
 
-    public CacheProxy(String rootDirectory, int cacheSize) {
+
+    public CacheProxy(String rootDirectory) {
         this.rootDirectory = rootDirectory;
-        this.cacheSize = cacheSize;
     }
 
     public Service cache(Service original) {
         Service proxyService = (Service) Proxy.newProxyInstance(ClassLoader.getSystemClassLoader(),
                 original.getClass().getInterfaces(),
-                new CacheInvocationHandler(original, cacheSize, rootDirectory));
+                new CacheInvocationHandler(original, rootDirectory));
         return proxyService;
     }
 
