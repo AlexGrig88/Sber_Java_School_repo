@@ -103,7 +103,7 @@ public class CacheInvocationHandler implements InvocationHandler {
 
     //при первом запуске приложения и если файл уже существует выгружаем
     // из файла в наш динамический кеш закешированные результаты
-    private void initCacheMap(File file) {
+    private synchronized void initCacheMap(File file) {
         if(!isInitialized && file.exists()) {
             isInitialized = true;
             try(FileInputStream fin = new FileInputStream(file);

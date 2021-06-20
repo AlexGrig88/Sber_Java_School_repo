@@ -21,6 +21,7 @@
         <module>homework_multithreading_2</module>
         <module>homework_JMM</module>
         <module>homework_concurrent</module>
+        <module>homework_jdbc</module>
     </modules>
 
     <properties>
